@@ -22,10 +22,21 @@ export class Game extends Engine {
         fish.vel = new Vector(-10,0)
         fish.events.on("exitviewport", (e) => this.fishLeft(e))
         this.add(fish)
+
+        const shark = new Actor()
+        shark.graphics.use(Resources.Shark.toSprite())
+        shark.pos = new Vector(300, 150)
+        shark.vel = new Vector(30, 0)
+        shark.events.on("exitviewport", (e) => this.sharkRight(e))
+        this.add(shark)
     }
 
     fishLeft(e) {
         e.target.pos = new Vector(1350, 300)
+    }
+
+    sharkRight(e) {
+        e.target.pos = new Vector(0, 150)
     }
 }
 
