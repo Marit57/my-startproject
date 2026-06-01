@@ -1,6 +1,8 @@
 import { Actor, Vector } from "excalibur"
 import { Resources } from './resources.js'
 import { Shark } from "./shark.js";
+import { Bubble } from "./bubble.js";
+import { Bones } from "./bones.js";
 
 export class Fish extends Actor {
     sprite;
@@ -30,9 +32,20 @@ export class Fish extends Actor {
         this.vel = new Vector(Math.random() * -150 - 50, 0);
     }
 
-    onCollisionStart(engine, other){
+    onCollisionStart(self, other){
         if(other.owner instanceof Shark){
+            this.scene.ui.updateScore();
             this.kill();
         }
+
+        if(other.owner instanceof Bubble){
+            this.scene.ui.updateScore();
+            this.die();
+        }
+    }
+
+    die(){
+        this.scene.add(new Bones(this.pos, this.scale));
+        this.resetPosition();
     }
 }

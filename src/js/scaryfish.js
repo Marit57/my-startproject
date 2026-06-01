@@ -10,7 +10,7 @@ export class ScaryFish extends Fish {
         this.sprite.tint = Color.Red;
     }
 
-    onCollisionStart(engine, other){
+    onCollisionStart(self, other){
         if(other.owner instanceof Shark){
         this.flee();
         }
